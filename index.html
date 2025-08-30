@@ -153,6 +153,13 @@
     event.preventDefault();
     const form = event.target;
 
+    
+        if (rating >= 4) {
+          alert("Grazie! We'd love if you shared your review on Google.");
+          window.location.href = "https://g.page/r/CTXbAU8V6jQYEAI/review";
+          return;
+        }
+
     fetch(form.action, {
       method: "POST",
       body: new FormData(form),
