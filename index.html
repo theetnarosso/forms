@@ -4,51 +4,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Etna Rosso Review</title>
+  <title>Etna Rosso Feedback</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
+      font-family: sans-serif;
+      background: #f9f9f9;
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      padding: 2em;
     }
-    .container {
+    .card {
       background: white;
-      padding: 2rem;
+      padding: 2em;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 100%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       max-width: 500px;
+      width: 100%;
     }
     h2 {
       text-align: center;
-      color: #111;
+      margin-bottom: 0.5em;
     }
-    .description {
+    p {
       text-align: center;
-      color: #555;
-      margin-bottom: 2rem;
+      margin-bottom: 2em;
     }
     label {
-      font-weight: bold;
-      margin-top: 1rem;
       display: block;
+      margin: 1em 0 0.5em;
+      font-weight: bold;
     }
     .stars {
       display: flex;
-      gap: 8px;
-      margin: 0.5rem 0 1rem 0;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 5px;
     }
     .stars input {
       display: none;
     }
     .stars label {
-      font-size: 2rem;
-      color: #ccc;
+      font-size: 1.8em;
       cursor: pointer;
     }
     .stars input:checked ~ label,
@@ -61,108 +57,105 @@
     }
     textarea, select, input[type="text"] {
       width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
+      padding: 0.5em;
+      margin-top: 0.5em;
+      font-size: 1em;
+      border-radius: 4px;
       border: 1px solid #ccc;
-      border-radius: 5px;
     }
     button {
-      width: 100%;
-      background-color: #b22222;
+      background-color: #b51c1c;
       color: white;
-      padding: 0.75rem;
+      padding: 0.75em;
+      width: 100%;
+      font-size: 1em;
       border: none;
-      border-radius: 5px;
-      font-size: 1rem;
+      border-radius: 4px;
+      margin-top: 1em;
       cursor: pointer;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background-color: #8b1a1a;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>How was your experience?</h2>
-    <p class="description">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
-    <form action="https://formspree.io/f/meolapyq" method="POST" id="reviewForm">
-      <label>Overall</label>
-      <div class="stars" id="overallStars">
-        <input type="radio" name="overall" value="1" id="overall1"><label for="overall1">&#9733;</label>
-        <input type="radio" name="overall" value="2" id="overall2"><label for="overall2">&#9733;</label>
-        <input type="radio" name="overall" value="3" id="overall3"><label for="overall3">&#9733;</label>
-        <input type="radio" name="overall" value="4" id="overall4"><label for="overall4">&#9733;</label>
-        <input type="radio" name="overall" value="5" id="overall5"><label for="overall5">&#9733;</label>
+<div class="card">
+  <h2>How was your experience?</h2>
+  <p>At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
+  <form id="reviewForm" action="https://formspree.io/f/meolapyq" method="POST">
+    <label>Overall</label>
+    <div class="stars" id="overallRating">
+      <input type="radio" name="rating" id="star1" value="1"><label for="star1">&#9733;</label>
+      <input type="radio" name="rating" id="star2" value="2"><label for="star2">&#9733;</label>
+      <input type="radio" name="rating" id="star3" value="3"><label for="star3">&#9733;</label>
+      <input type="radio" name="rating" id="star4" value="4"><label for="star4">&#9733;</label>
+      <input type="radio" name="rating" id="star5" value="5"><label for="star5">&#9733;</label>
+    </div>
+
+    <div id="detailsSection" class="hidden">
+      <label>Your Name</label>
+      <input type="text" name="name" placeholder="Optional"/>
+
+      <label>When did you visit?</label>
+      <input type="date" name="visit_date" />
+
+      <label>Food</label>
+      <div class="stars">
+        <input type="radio" name="food" id="food1" value="1"><label for="food1">&#9733;</label>
+        <input type="radio" name="food" id="food2" value="2"><label for="food2">&#9733;</label>
+        <input type="radio" name="food" id="food3" value="3"><label for="food3">&#9733;</label>
+        <input type="radio" name="food" id="food4" value="4"><label for="food4">&#9733;</label>
+        <input type="radio" name="food" id="food5" value="5"><label for="food5">&#9733;</label>
       </div>
 
-      <div id="details" class="hidden">
-        <label for="name">Your Name</label>
-        <input type="text" name="name" id="name" placeholder="Optional">
-
-        <label for="visitDate">When did you visit?</label>
-        <select name="visitDate" id="visitDate">
-          <option value="">Select a date</option>
-          <option value="Today">Today</option>
-          <option value="Yesterday">Yesterday</option>
-          <option value="Last 3 days">Last 3 days</option>
-          <option value="Last week">Last week</option>
-          <option value="Last month">Last month</option>
-          <option value="More than a month ago">More than a month ago</option>
-        </select>
-
-        <label>Food</label>
-        <div class="stars">
-          <input type="radio" name="food" value="1" id="food1"><label for="food1">&#9733;</label>
-          <input type="radio" name="food" value="2" id="food2"><label for="food2">&#9733;</label>
-          <input type="radio" name="food" value="3" id="food3"><label for="food3">&#9733;</label>
-          <input type="radio" name="food" value="4" id="food4"><label for="food4">&#9733;</label>
-          <input type="radio" name="food" value="5" id="food5"><label for="food5">&#9733;</label>
-        </div>
-
-        <label>Service</label>
-        <div class="stars">
-          <input type="radio" name="service" value="1" id="service1"><label for="service1">&#9733;</label>
-          <input type="radio" name="service" value="2" id="service2"><label for="service2">&#9733;</label>
-          <input type="radio" name="service" value="3" id="service3"><label for="service3">&#9733;</label>
-          <input type="radio" name="service" value="4" id="service4"><label for="service4">&#9733;</label>
-          <input type="radio" name="service" value="5" id="service5"><label for="service5">&#9733;</label>
-        </div>
-
-        <label>Atmosphere</label>
-        <div class="stars">
-          <input type="radio" name="atmosphere" value="1" id="atmos1"><label for="atmos1">&#9733;</label>
-          <input type="radio" name="atmosphere" value="2" id="atmos2"><label for="atmos2">&#9733;</label>
-          <input type="radio" name="atmosphere" value="3" id="atmos3"><label for="atmos3">&#9733;</label>
-          <input type="radio" name="atmosphere" value="4" id="atmos4"><label for="atmos4">&#9733;</label>
-          <input type="radio" name="atmosphere" value="5" id="atmos5"><label for="atmos5">&#9733;</label>
-        </div>
-
-        <label>Wait time</label>
-        <div class="stars">
-          <input type="radio" name="wait" value="1" id="wait1"><label for="wait1">&#9733;</label>
-          <input type="radio" name="wait" value="2" id="wait2"><label for="wait2">&#9733;</label>
-          <input type="radio" name="wait" value="3" id="wait3"><label for="wait3">&#9733;</label>
-          <input type="radio" name="wait" value="4" id="wait4"><label for="wait4">&#9733;</label>
-          <input type="radio" name="wait" value="5" id="wait5"><label for="wait5">&#9733;</label>
-        </div>
-
-        <label for="feedback">We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</label>
-        <textarea name="feedback" rows="5" id="feedback" placeholder="Your feedback..."></textarea>
+      <label>Service</label>
+      <div class="stars">
+        <input type="radio" name="service" id="service1" value="1"><label for="service1">&#9733;</label>
+        <input type="radio" name="service" id="service2" value="2"><label for="service2">&#9733;</label>
+        <input type="radio" name="service" id="service3" value="3"><label for="service3">&#9733;</label>
+        <input type="radio" name="service" id="service4" value="4"><label for="service4">&#9733;</label>
+        <input type="radio" name="service" id="service5" value="5"><label for="service5">&#9733;</label>
       </div>
 
-      <button type="submit">Submit Feedback</button>
-    </form>
-  </div>
-  <script>
-    const overallRadios = document.querySelectorAll('input[name="overall"]');
-    const detailsSection = document.getElementById("details");
-    overallRadios.forEach(radio => {
-      radio.addEventListener("change", () => {
-        const selectedValue = parseInt(document.querySelector('input[name="overall"]:checked').value);
-        detailsSection.classList.toggle("hidden", selectedValue > 3);
-      });
+      <label>Atmosphere</label>
+      <div class="stars">
+        <input type="radio" name="atmosphere" id="atmos1" value="1"><label for="atmos1">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmos2" value="2"><label for="atmos2">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmos3" value="3"><label for="atmos3">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmos4" value="4"><label for="atmos4">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmos5" value="5"><label for="atmos5">&#9733;</label>
+      </div>
+
+      <label>Wait time</label>
+      <div class="stars">
+        <input type="radio" name="wait" id="wait1" value="1"><label for="wait1">&#9733;</label>
+        <input type="radio" name="wait" id="wait2" value="2"><label for="wait2">&#9733;</label>
+        <input type="radio" name="wait" id="wait3" value="3"><label for="wait3">&#9733;</label>
+        <input type="radio" name="wait" id="wait4" value="4"><label for="wait4">&#9733;</label>
+        <input type="radio" name="wait" id="wait5" value="5"><label for="wait5">&#9733;</label>
+      </div>
+
+      <label>We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</label>
+      <textarea name="message" rows="5" placeholder="Your feedback..."></textarea>
+    </div>
+
+    <button type="submit" id="submitBtn">Submit Feedback</button>
+  </form>
+</div>
+
+<script>
+  const stars = document.querySelectorAll('input[name="rating"]');
+  const form = document.getElementById('reviewForm');
+  const detailsSection = document.getElementById('detailsSection');
+
+  stars.forEach(star => {
+    star.addEventListener('change', () => {
+      if (parseInt(star.value) <= 3) {
+        detailsSection.classList.remove('hidden');
+      } else {
+        detailsSection.classList.add('hidden');
+        window.open("https://g.page/r/CTXbAU8V6jQYEAI/review", "_blank");
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
