@@ -35,7 +35,7 @@
       margin-top: 25px;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 90%;
       padding: 10px;
       margin-bottom: 10px;
@@ -51,7 +51,11 @@
   </style>
 </head>
 <body>
-  <h2>How was your experience?</h2>
+  <h2>We’d love your honest feedback</h2>
+  <p style="max-width: 500px; margin: auto;">
+    At Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.
+  </p>
+
   <div id="stars">
     <span class="star" data-index="1">&#9734;</span>
     <span class="star" data-index="2">&#9734;</span>
@@ -61,8 +65,17 @@
   </div>
 
   <form id="feedback-form" action="https://formspree.io/f/meolapyq" method="POST">
-    <p>We’d love to know how we can improve.</p>
+    <p style="font-weight: 400;">
+      We’re sorry it wasn’t perfect. Please help us understand — we care deeply and always respond.
+    </p>
     <input type="text" name="name" placeholder="Name (optional)" required>
+    <select name="visit-date" required>
+      <option value="" disabled selected>When did you visit?</option>
+      <option value="Today">Today</option>
+      <option value="Yesterday">Yesterday</option>
+      <option value="Within the last week">Within the last week</option>
+      <option value="More than a week ago">More than a week ago</option>
+    </select>
     <textarea name="message" placeholder="Leave your feedback..." required></textarea>
     <input type="hidden" name="rating" id="rating">
     <input type="hidden" name="_subject" value="Etna Rosso Review Alert (3 Stars or Less)">
@@ -84,7 +97,7 @@
         });
 
         if (rating >= 4) {
-          // Tell the parent page to open the Google review URL
+          alert("Grazie! We'd love if you shared your review on Google.");
           window.parent.postMessage("openGoogleReview", "*");
         } else {
           ratingField.value = rating;
