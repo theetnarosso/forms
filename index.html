@@ -154,17 +154,18 @@
     event.preventDefault();
     const form = event.target;
 
-    // Determine the star rating selected
+    // Determine selected rating
     const ratingInput = document.querySelector('input[name="rating"]:checked');
     const rating = ratingInput ? parseInt(ratingInput.value) : 0;
 
+    // Redirect to Google Reviews for 4 or 5 stars, no Formspree
     if (rating >= 4) {
       alert("Grazie! We'd love if you shared your review on Google.");
       window.location.href = "https://g.page/r/CTXbAU8V6jQYEAI/review";
-      return; // Do not submit to Formspree
+      return false;
     }
 
-    // If 1-3 stars, submit to Formspree
+    // Submit to Formspree only for 1–3 stars
     fetch(form.action, {
       method: "POST",
       body: new FormData(form),
