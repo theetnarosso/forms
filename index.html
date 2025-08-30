@@ -58,7 +58,7 @@
   <h2>How was your experience?</h2>
   <p style="text-align:center;">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
 
-  <form id="reviewForm" action="https://formspree.io/f/meolapyq" method="POST">
+  <form id="reviewForm" action="https://formspree.io/f/meolapyq" method="POST" onsubmit="handleSubmit(event)">
     <label for="overall">Overall</label>
     <div class="stars" id="overallRating">
       <input type="radio" name="overall" id="star5" value="5"><label for="star5">&#9733;</label>
@@ -143,5 +143,30 @@
       }
     });
   </script>
+
+<div id="thankYou" style="display:none; text-align:center; padding:20px; font-size:1.2em;">
+  ✅ Thank you! Your feedback has been received.
+</div>
+
+<script>
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        document.getElementById("thankYou").style.display = "block";
+      } else {
+        alert("There was a problem submitting your feedback. Please try again.");
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
