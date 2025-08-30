@@ -4,179 +4,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Etna Rosso Feedback</title>
+  <title>Review Form</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #fafafa;
-      padding: 2rem;
-    }
-    .form-container {
+      font-family: Arial, sans-serif;
+      padding: 20px;
       max-width: 600px;
       margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
       text-align: center;
     }
     .stars {
       display: flex;
-      flex-direction: row;
-      gap: 4px;
-      font-size: 1.8rem;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+    .stars input {
+      display: none;
+    }
+    .stars label {
+      font-size: 2rem;
+      color: #ccc;
       cursor: pointer;
     }
-    .category {
-      margin-top: 1rem;
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: red;
     }
     .hidden {
       display: none;
     }
-    .red {
-      color: red;
-    }
     textarea, input, select {
       width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      resize: vertical;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 1rem;
     }
     button {
-      margin-top: 1.5rem;
-      padding: 0.75rem;
-      background: #c62828;
+      background-color: #b91c1c;
       color: white;
       border: none;
-      border-radius: 5px;
+      padding: 12px;
+      margin-top: 20px;
       width: 100%;
       font-size: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>How was your experience?</h2>
-    <p style="text-align: center;">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
+  <h2>How was your experience?</h2>
+  <p style="text-align:center;">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
 
-    <div class="category">
-      <label><strong>Overall</strong></label>
-      <div class="stars" id="overall-stars"></div>
+  <form id="reviewForm">
+    <label for="overall">Overall</label>
+    <div class="stars" id="overallRating">
+      <input type="radio" name="overall" id="star5" value="5"><label for="star5">&#9733;</label>
+      <input type="radio" name="overall" id="star4" value="4"><label for="star4">&#9733;</label>
+      <input type="radio" name="overall" id="star3" value="3"><label for="star3">&#9733;</label>
+      <input type="radio" name="overall" id="star2" value="2"><label for="star2">&#9733;</label>
+      <input type="radio" name="overall" id="star1" value="1"><label for="star1">&#9733;</label>
     </div>
 
-    <div id="extended-form" class="hidden">
-      <div class="category">
-        <label for="name"><strong>Your Name</strong></label>
-        <input type="text" id="name" name="name" placeholder="Optional">
+    <div id="expandedSection" class="hidden">
+      <label>Your Name</label>
+      <input type="text" name="name" placeholder="Optional" />
+      <label>When did you visit?</label>
+      <input type="date" name="visitDate" />
+
+      <label>Food</label>
+      <div class="stars" id="foodRating">
+        <input type="radio" name="food" id="food5" value="5"><label for="food5">&#9733;</label>
+        <input type="radio" name="food" id="food4" value="4"><label for="food4">&#9733;</label>
+        <input type="radio" name="food" id="food3" value="3"><label for="food3">&#9733;</label>
+        <input type="radio" name="food" id="food2" value="2"><label for="food2">&#9733;</label>
+        <input type="radio" name="food" id="food1" value="1"><label for="food1">&#9733;</label>
       </div>
 
-      <div class="category">
-        <label for="visit-date"><strong>When did you visit?</strong></label>
-        <input type="date" id="visit-date" name="visit-date">
+      <label>Service</label>
+      <div class="stars" id="serviceRating">
+        <input type="radio" name="service" id="service5" value="5"><label for="service5">&#9733;</label>
+        <input type="radio" name="service" id="service4" value="4"><label for="service4">&#9733;</label>
+        <input type="radio" name="service" id="service3" value="3"><label for="service3">&#9733;</label>
+        <input type="radio" name="service" id="service2" value="2"><label for="service2">&#9733;</label>
+        <input type="radio" name="service" id="service1" value="1"><label for="service1">&#9733;</label>
       </div>
 
-      <div class="category">
-        <label><strong>Food</strong></label>
-        <div class="stars" data-category="Food"></div>
+      <label>Atmosphere</label>
+      <div class="stars" id="atmosphereRating">
+        <input type="radio" name="atmosphere" id="atmo5" value="5"><label for="atmo5">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmo4" value="4"><label for="atmo4">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmo3" value="3"><label for="atmo3">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmo2" value="2"><label for="atmo2">&#9733;</label>
+        <input type="radio" name="atmosphere" id="atmo1" value="1"><label for="atmo1">&#9733;</label>
       </div>
 
-      <div class="category">
-        <label><strong>Service</strong></label>
-        <div class="stars" data-category="Service"></div>
+      <label>Wait time</label>
+      <div class="stars" id="waitRating">
+        <input type="radio" name="wait" id="wait5" value="5"><label for="wait5">&#9733;</label>
+        <input type="radio" name="wait" id="wait4" value="4"><label for="wait4">&#9733;</label>
+        <input type="radio" name="wait" id="wait3" value="3"><label for="wait3">&#9733;</label>
+        <input type="radio" name="wait" id="wait2" value="2"><label for="wait2">&#9733;</label>
+        <input type="radio" name="wait" id="wait1" value="1"><label for="wait1">&#9733;</label>
       </div>
 
-      <div class="category">
-        <label><strong>Atmosphere</strong></label>
-        <div class="stars" data-category="Atmosphere"></div>
-      </div>
-
-      <div class="category">
-        <label><strong>Wait time</strong></label>
-        <div class="stars" data-category="Wait time"></div>
-      </div>
-
-      <div class="category">
-        <label><strong>We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</strong></label>
-        <textarea id="feedback" rows="4" placeholder="Your feedback..."></textarea>
-      </div>
+      <label>We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</label>
+      <textarea name="feedback" placeholder="Your feedback..."></textarea>
     </div>
 
-    <form id="feedback-form" action="https://formspree.io/f/meolapyq" method="POST">
-      <input type="hidden" name="overallRating" id="overallRating">
-      <input type="hidden" name="extendedData" id="extendedData">
-      <button type="submit">Submit Feedback</button>
-    </form>
-  </div>
+    <button type="submit">Submit Feedback</button>
+  </form>
 
   <script>
-    const overallStars = document.getElementById("overall-stars");
-    const extendedForm = document.getElementById("extended-form");
-    const overallRatingInput = document.getElementById("overallRating");
-    const extendedDataInput = document.getElementById("extendedData");
-    const redirectURL = "https://g.page/r/CTXbAU8V6jQYEAI/review";
+    const form = document.getElementById('reviewForm');
+    const expanded = document.getElementById('expandedSection');
+    const stars = document.getElementsByName('overall');
 
-    function renderStars(container, onSelect) {
-      container.innerHTML = "";
-      for (let i = 1; i <= 5; i++) {
-        const star = document.createElement("span");
-        star.innerHTML = "&#9733;";
-        star.dataset.value = i;
-        star.classList.add("star");
-        star.style.color = "#aaa";
-        star.addEventListener("click", () => {
-          [...container.children].forEach((s, idx) => {
-            s.style.color = idx < i ? "red" : "#aaa";
-          });
-          onSelect(i);
-        });
-        container.appendChild(star);
-      }
-    }
+    stars.forEach(star => {
+      star.addEventListener('change', () => {
+        const rating = parseInt(star.value);
+        if (rating >= 4) {
+          expanded.classList.add('hidden');
+        } else {
+          expanded.classList.remove('hidden');
+        }
+      });
+    });
 
-    let overallValue = 0;
-    renderStars(overallStars, (val) => {
-      overallValue = val;
-      overallRatingInput.value = val;
-      if (val <= 3) {
-        extendedForm.classList.remove("hidden");
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const selected = [...stars].find(r => r.checked);
+      if (selected && parseInt(selected.value) >= 4) {
+        window.parent.postMessage({ type: 'openReview' }, '*');
       } else {
-        window.location.href = redirectURL;
+        alert("Thank you for your feedback!");
       }
     });
-
-    // Additional categories
-    document.querySelectorAll(".stars[data-category]").forEach(starSet => {
-      renderStars(starSet, () => {});
-    });
-
-    // Capture extended data on submit
-    document.getElementById("feedback-form").addEventListener("submit", function (e) {
-      if (overallValue <= 3) {
-        const data = {
-          name: document.getElementById("name").value,
-          visitDate: document.getElementById("visit-date").value,
-          food: starValue("Food"),
-          service: starValue("Service"),
-          atmosphere: starValue("Atmosphere"),
-          waitTime: starValue("Wait time"),
-          message: document.getElementById("feedback").value
-        };
-        extendedDataInput.value = JSON.stringify(data);
-      }
-    });
-
-    function starValue(category) {
-      const stars = document.querySelector(`.stars[data-category='${category}']`).children;
-      let count = 0;
-      for (const star of stars) {
-        if (star.style.color === "red") count++;
-      }
-      return count;
-    }
   </script>
 </body>
 </html>
