@@ -4,72 +4,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Etna Rosso Review Form</title>
+  <title>Etna Rosso Review</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
-      padding: 20px;
-      background: #f9f9f9;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
     .container {
-      max-width: 600px;
-      margin: auto;
       background: white;
-      padding: 30px;
-      border-radius: 8px;
+      padding: 2rem;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
     }
     h2 {
       text-align: center;
-      margin-bottom: 10px;
+      color: #111;
     }
     .description {
       text-align: center;
-      font-size: 1rem;
-      margin-bottom: 30px;
-      color: #444;
+      color: #555;
+      margin-bottom: 2rem;
     }
-    .rating-group {
-      margin-bottom: 20px;
-    }
-    .rating-label {
-      margin-bottom: 8px;
+    label {
       font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    .stars {
+      display: flex;
+      gap: 8px;
+      margin: 0.5rem 0 1rem 0;
     }
     .stars input {
       display: none;
     }
     .stars label {
-      font-size: 2em;
-      color: lightgray;
+      font-size: 2rem;
+      color: #ccc;
       cursor: pointer;
-      transition: color 0.2s;
     }
     .stars input:checked ~ label,
     .stars label:hover,
     .stars label:hover ~ label {
-      color: gold;
+      color: red;
     }
-    textarea {
+    .hidden {
+      display: none;
+    }
+    textarea, select, input[type="text"] {
       width: 100%;
-      height: 100px;
-      padding: 10px;
-      font-size: 1rem;
-      margin-top: 20px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
     button {
-      margin-top: 20px;
-      padding: 12px;
       width: 100%;
-      font-size: 1.1rem;
-      background-color: #B22222;
+      background-color: #b22222;
       color: white;
+      padding: 0.75rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 1rem;
       cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #8b1a1a;
     }
   </style>
 </head>
@@ -77,56 +86,83 @@
   <div class="container">
     <h2>How was your experience?</h2>
     <p class="description">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
-
-    <form action="https://formspree.io/f/meolapyq" method="POST">
-      <div class="rating-group">
-        <div class="rating-label">Food</div>
-        <div class="stars">
-          <input type="radio" id="food5" name="food" value="5"><label for="food5">&#9733;</label>
-          <input type="radio" id="food4" name="food" value="4"><label for="food4">&#9733;</label>
-          <input type="radio" id="food3" name="food" value="3"><label for="food3">&#9733;</label>
-          <input type="radio" id="food2" name="food" value="2"><label for="food2">&#9733;</label>
-          <input type="radio" id="food1" name="food" value="1"><label for="food1">&#9733;</label>
-        </div>
+    <form action="https://formspree.io/f/meolapyq" method="POST" id="reviewForm">
+      <label>Overall</label>
+      <div class="stars" id="overallStars">
+        <input type="radio" name="overall" value="1" id="overall1"><label for="overall1">&#9733;</label>
+        <input type="radio" name="overall" value="2" id="overall2"><label for="overall2">&#9733;</label>
+        <input type="radio" name="overall" value="3" id="overall3"><label for="overall3">&#9733;</label>
+        <input type="radio" name="overall" value="4" id="overall4"><label for="overall4">&#9733;</label>
+        <input type="radio" name="overall" value="5" id="overall5"><label for="overall5">&#9733;</label>
       </div>
 
-      <div class="rating-group">
-        <div class="rating-label">Service</div>
-        <div class="stars">
-          <input type="radio" id="service5" name="service" value="5"><label for="service5">&#9733;</label>
-          <input type="radio" id="service4" name="service" value="4"><label for="service4">&#9733;</label>
-          <input type="radio" id="service3" name="service" value="3"><label for="service3">&#9733;</label>
-          <input type="radio" id="service2" name="service" value="2"><label for="service2">&#9733;</label>
-          <input type="radio" id="service1" name="service" value="1"><label for="service1">&#9733;</label>
-        </div>
-      </div>
+      <div id="details" class="hidden">
+        <label for="name">Your Name</label>
+        <input type="text" name="name" id="name" placeholder="Optional">
 
-      <div class="rating-group">
-        <div class="rating-label">Atmosphere</div>
-        <div class="stars">
-          <input type="radio" id="atmosphere5" name="atmosphere" value="5"><label for="atmosphere5">&#9733;</label>
-          <input type="radio" id="atmosphere4" name="atmosphere" value="4"><label for="atmosphere4">&#9733;</label>
-          <input type="radio" id="atmosphere3" name="atmosphere" value="3"><label for="atmosphere3">&#9733;</label>
-          <input type="radio" id="atmosphere2" name="atmosphere" value="2"><label for="atmosphere2">&#9733;</label>
-          <input type="radio" id="atmosphere1" name="atmosphere" value="1"><label for="atmosphere1">&#9733;</label>
-        </div>
-      </div>
+        <label for="visitDate">When did you visit?</label>
+        <select name="visitDate" id="visitDate">
+          <option value="">Select a date</option>
+          <option value="Today">Today</option>
+          <option value="Yesterday">Yesterday</option>
+          <option value="Last 3 days">Last 3 days</option>
+          <option value="Last week">Last week</option>
+          <option value="Last month">Last month</option>
+          <option value="More than a month ago">More than a month ago</option>
+        </select>
 
-      <div class="rating-group">
-        <div class="rating-label">Wait time</div>
+        <label>Food</label>
         <div class="stars">
-          <input type="radio" id="wait5" name="wait_time" value="5"><label for="wait5">&#9733;</label>
-          <input type="radio" id="wait4" name="wait_time" value="4"><label for="wait4">&#9733;</label>
-          <input type="radio" id="wait3" name="wait_time" value="3"><label for="wait3">&#9733;</label>
-          <input type="radio" id="wait2" name="wait_time" value="2"><label for="wait2">&#9733;</label>
-          <input type="radio" id="wait1" name="wait_time" value="1"><label for="wait1">&#9733;</label>
+          <input type="radio" name="food" value="1" id="food1"><label for="food1">&#9733;</label>
+          <input type="radio" name="food" value="2" id="food2"><label for="food2">&#9733;</label>
+          <input type="radio" name="food" value="3" id="food3"><label for="food3">&#9733;</label>
+          <input type="radio" name="food" value="4" id="food4"><label for="food4">&#9733;</label>
+          <input type="radio" name="food" value="5" id="food5"><label for="food5">&#9733;</label>
         </div>
-      </div>
 
-      <textarea name="message" placeholder="We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us"></textarea>
+        <label>Service</label>
+        <div class="stars">
+          <input type="radio" name="service" value="1" id="service1"><label for="service1">&#9733;</label>
+          <input type="radio" name="service" value="2" id="service2"><label for="service2">&#9733;</label>
+          <input type="radio" name="service" value="3" id="service3"><label for="service3">&#9733;</label>
+          <input type="radio" name="service" value="4" id="service4"><label for="service4">&#9733;</label>
+          <input type="radio" name="service" value="5" id="service5"><label for="service5">&#9733;</label>
+        </div>
+
+        <label>Atmosphere</label>
+        <div class="stars">
+          <input type="radio" name="atmosphere" value="1" id="atmos1"><label for="atmos1">&#9733;</label>
+          <input type="radio" name="atmosphere" value="2" id="atmos2"><label for="atmos2">&#9733;</label>
+          <input type="radio" name="atmosphere" value="3" id="atmos3"><label for="atmos3">&#9733;</label>
+          <input type="radio" name="atmosphere" value="4" id="atmos4"><label for="atmos4">&#9733;</label>
+          <input type="radio" name="atmosphere" value="5" id="atmos5"><label for="atmos5">&#9733;</label>
+        </div>
+
+        <label>Wait time</label>
+        <div class="stars">
+          <input type="radio" name="wait" value="1" id="wait1"><label for="wait1">&#9733;</label>
+          <input type="radio" name="wait" value="2" id="wait2"><label for="wait2">&#9733;</label>
+          <input type="radio" name="wait" value="3" id="wait3"><label for="wait3">&#9733;</label>
+          <input type="radio" name="wait" value="4" id="wait4"><label for="wait4">&#9733;</label>
+          <input type="radio" name="wait" value="5" id="wait5"><label for="wait5">&#9733;</label>
+        </div>
+
+        <label for="feedback">We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</label>
+        <textarea name="feedback" rows="5" id="feedback" placeholder="Your feedback..."></textarea>
+      </div>
 
       <button type="submit">Submit Feedback</button>
     </form>
   </div>
+  <script>
+    const overallRadios = document.querySelectorAll('input[name="overall"]');
+    const detailsSection = document.getElementById("details");
+    overallRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        const selectedValue = parseInt(document.querySelector('input[name="overall"]:checked').value);
+        detailsSection.classList.toggle("hidden", selectedValue > 3);
+      });
+    });
+  </script>
 </body>
 </html>
