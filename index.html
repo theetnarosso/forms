@@ -85,7 +85,7 @@
         });
 
         if (rating >= 4) {
-          window.location.href = reviewLink;
+          window.open(reviewLink, "_blank"); // opens in new tab (iframe-safe)
         } else {
           ratingField.value = rating;
           form.style.display = "block";
