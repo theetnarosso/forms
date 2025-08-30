@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Review Form</title>
+  <title>Review Form (Corrected)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,11 +13,18 @@
     }
     h2 {
       text-align: center;
+      margin-bottom: 6px;
+    }
+    p.sub {
+      text-align: center;
+      margin-top: 0;
+      color: #444;
     }
     .stars {
       display: flex;
       flex-direction: row-reverse;
       justify-content: flex-end;
+      gap: 4px;
     }
     .stars input {
       display: none;
@@ -27,6 +33,7 @@
       font-size: 2rem;
       color: #ccc;
       cursor: pointer;
+      user-select: none;
     }
     .stars input:checked ~ label,
     .stars label:hover,
@@ -34,13 +41,14 @@
       color: red;
     }
     .hidden {
-      display: none;
+      display: none !important;
     }
     textarea, input, select {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
       font-size: 1rem;
+      box-sizing: border-box;
     }
     button {
       background-color: #b91c1c;
@@ -51,97 +59,207 @@
       width: 100%;
       font-size: 1rem;
       cursor: pointer;
+      border-radius: 6px;
     }
+    .msg {
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.45;
+      padding: 18px 8px;
+    }
+    .msg strong { display: block; margin-bottom: 6px; }
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .secondary {
+      background: #eee;
+      color: #111;
+    }
+    .row { margin-top: 8px; }
   </style>
 </head>
 <body>
   <h2>How was your experience?</h2>
-  <p style="text-align:center;">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
+  <p class="sub">At The Etna Rosso, we personally read every message. Please rate your experience and help us serve you even better next time.</p>
 
-  <form id="reviewForm" action="https://formspree.io/f/meolapyq" method="POST">
+  <form id="reviewForm" action="https://formspree.io/f/meolapyq" method="POST" novalidate>
     <label for="overall">Overall</label>
     <div class="stars" id="overallRating">
-      <input type="radio" name="overall" id="star5" value="5"><label for="star5">&#9733;</label>
-      <input type="radio" name="overall" id="star4" value="4"><label for="star4">&#9733;</label>
-      <input type="radio" name="overall" id="star3" value="3"><label for="star3">&#9733;</label>
-      <input type="radio" name="overall" id="star2" value="2"><label for="star2">&#9733;</label>
-      <input type="radio" name="overall" id="star1" value="1"><label for="star1">&#9733;</label>
+      <input type="radio" name="overall" id="star5" value="5"><label for="star5" aria-label="5 stars">&#9733;</label>
+      <input type="radio" name="overall" id="star4" value="4"><label for="star4" aria-label="4 stars">&#9733;</label>
+      <input type="radio" name="overall" id="star3" value="3"><label for="star3" aria-label="3 stars">&#9733;</label>
+      <input type="radio" name="overall" id="star2" value="2"><label for="star2" aria-label="2 stars">&#9733;</label>
+      <input type="radio" name="overall" id="star1" value="1"><label for="star1" aria-label="1 star">&#9733;</label>
     </div>
 
-    <div id="expandedSection" class="hidden">
-      <label>Your Name</label>
-      <input type="text" name="name" placeholder="Optional" />
-      <label>When did you visit?</label>
-      <input type="date" name="visitDate" />
-
-      <label>Food</label>
-      <div class="stars" id="foodRating">
-        <input type="radio" name="food" id="food5" value="5"><label for="food5">&#9733;</label>
-        <input type="radio" name="food" id="food4" value="4"><label for="food4">&#9733;</label>
-        <input type="radio" name="food" id="food3" value="3"><label for="food3">&#9733;</label>
-        <input type="radio" name="food" id="food2" value="2"><label for="food2">&#9733;</label>
-        <input type="radio" name="food" id="food1" value="1"><label for="food1">&#9733;</label>
+    <div id="expandedSection" class="hidden" aria-live="polite">
+      <div class="row">
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Optional" />
+      </div>
+      <div class="row">
+        <label>When did you visit?</label>
+        <input type="date" name="visitDate" />
       </div>
 
-      <label>Service</label>
-      <div class="stars" id="serviceRating">
-        <input type="radio" name="service" id="service5" value="5"><label for="service5">&#9733;</label>
-        <input type="radio" name="service" id="service4" value="4"><label for="service4">&#9733;</label>
-        <input type="radio" name="service" id="service3" value="3"><label for="service3">&#9733;</label>
-        <input type="radio" name="service" id="service2" value="2"><label for="service2">&#9733;</label>
-        <input type="radio" name="service" id="service1" value="1"><label for="service1">&#9733;</label>
+      <div class="row">
+        <label>Food</label>
+        <div class="stars" id="foodRating">
+          <input type="radio" name="food" id="food5" value="5"><label for="food5">&#9733;</label>
+          <input type="radio" name="food" id="food4" value="4"><label for="food4">&#9733;</label>
+          <input type="radio" name="food" id="food3" value="3"><label for="food3">&#9733;</label>
+          <input type="radio" name="food" id="food2" value="2"><label for="food2">&#9733;</label>
+          <input type="radio" name="food" id="food1" value="1"><label for="food1">&#9733;</label>
+        </div>
       </div>
 
-      <label>Atmosphere</label>
-      <div class="stars" id="atmosphereRating">
-        <input type="radio" name="atmosphere" id="atmo5" value="5"><label for="atmo5">&#9733;</label>
-        <input type="radio" name="atmosphere" id="atmo4" value="4"><label for="atmo4">&#9733;</label>
-        <input type="radio" name="atmosphere" id="atmo3" value="3"><label for="atmo3">&#9733;</label>
-        <input type="radio" name="atmosphere" id="atmo2" value="2"><label for="atmo2">&#9733;</label>
-        <input type="radio" name="atmosphere" id="atmo1" value="1"><label for="atmo1">&#9733;</label>
+      <div class="row">
+        <label>Service</label>
+        <div class="stars" id="serviceRating">
+          <input type="radio" name="service" id="service5" value="5"><label for="service5">&#9733;</label>
+          <input type="radio" name="service" id="service4" value="4"><label for="service4">&#9733;</label>
+          <input type="radio" name="service" id="service3" value="3"><label for="service3">&#9733;</label>
+          <input type="radio" name="service" id="service2" value="2"><label for="service2">&#9733;</label>
+          <input type="radio" name="service" id="service1" value="1"><label for="service1">&#9733;</label>
+        </div>
       </div>
 
-      <label>Wait time</label>
-      <div class="stars" id="waitRating">
-        <input type="radio" name="wait" id="wait5" value="5"><label for="wait5">&#9733;</label>
-        <input type="radio" name="wait" id="wait4" value="4"><label for="wait4">&#9733;</label>
-        <input type="radio" name="wait" id="wait3" value="3"><label for="wait3">&#9733;</label>
-        <input type="radio" name="wait" id="wait2" value="2"><label for="wait2">&#9733;</label>
-        <input type="radio" name="wait" id="wait1" value="1"><label for="wait1">&#9733;</label>
+      <div class="row">
+        <label>Atmosphere</label>
+        <div class="stars" id="atmosphereRating">
+          <input type="radio" name="atmosphere" id="atmo5" value="5"><label for="atmo5">&#9733;</label>
+          <input type="radio" name="atmosphere" id="atmo4" value="4"><label for="atmo4">&#9733;</label>
+          <input type="radio" name="atmosphere" id="atmo3" value="3"><label for="atmo3">&#9733;</label>
+          <input type="radio" name="atmosphere" id="atmo2" value="2"><label for="atmo2">&#9733;</label>
+          <input type="radio" name="atmosphere" id="atmo1" value="1"><label for="atmo1">&#9733;</label>
+        </div>
       </div>
 
-      <label>We’re sorry it wasn’t perfect. Please help us understand, your feedback is valuable to us</label>
-      <textarea name="feedback" placeholder="Your feedback..."></textarea>
+      <div class="row">
+        <label>Wait time</label>
+        <div class="stars" id="waitRating">
+          <input type="radio" name="wait" id="wait5" value="5"><label for="wait5">&#9733;</label>
+          <input type="radio" name="wait" id="wait4" value="4"><label for="wait4">&#9733;</label>
+          <input type="radio" name="wait" id="wait3" value="3"><label for="wait3">&#9733;</label>
+          <input type="radio" name="wait" id="wait2" value="2"><label for="wait2">&#9733;</label>
+          <input type="radio" name="wait" id="wait1" value="1"><label for="wait1">&#9733;</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <label>We’re sorry it wasn’t perfect. Please help us understand—your feedback is valuable to us.</label>
+        <textarea name="feedback" placeholder="Your feedback..."></textarea>
+      </div>
     </div>
 
-    <button type="submit">Submit Feedback</button>
+    <button type="submit" id="submitBtn">Submit Feedback</button>
   </form>
 
-  <script>
-    const form = document.getElementById('reviewForm');
-    const expanded = document.getElementById('expandedSection');
-    const stars = document.getElementsByName('overall');
+  <!-- Positive flow message (4–5 stars) -->
+  <div id="googlePrompt" class="msg hidden">
+    <strong>Grazie! We'd love if you shared your review on Google.</strong>
+    <div class="actions">
+      <button id="openGoogle">Open Google Reviews</button>
+      <button id="closePositive" class="secondary">Close</button>
+    </div>
+  </div>
 
-    stars.forEach(star => {
-      star.addEventListener('change', () => {
-        const rating = parseInt(star.value);
+  <!-- Negative/neutral flow message (after Formspree) -->
+  <div id="thankYou" class="msg hidden">
+    ✅ Thank you! Your feedback has been received.
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById('reviewForm');
+      const expanded = document.getElementById('expandedSection');
+      const stars = Array.from(document.getElementsByName('overall'));
+      const googlePrompt = document.getElementById('googlePrompt');
+      const thankYou = document.getElementById('thankYou');
+      const openGoogleBtn = document.getElementById('openGoogle');
+      const closePositiveBtn = document.getElementById('closePositive');
+
+      function getOverall() {
+        const selected = stars.find(r => r.checked);
+        return selected ? parseInt(selected.value, 10) : null;
+      }
+
+      // Toggle expanded section based on rating
+      stars.forEach(star => {
+        star.addEventListener('change', () => {
+          const rating = getOverall();
+          if (rating !== null && rating >= 4) {
+            expanded.classList.add('hidden');
+          } else {
+            expanded.classList.remove('hidden');
+          }
+        });
+      });
+
+      // Positive flow actions
+      function showPositiveFlow() {
+        form.classList.add('hidden');
+        googlePrompt.classList.remove('hidden');
+        try {
+          window.parent.postMessage({ type: 'openReview' }, '*');
+        } catch (e) {
+          /* no-op if not embedded */
+        }
+      }
+
+      // Negative/neutral flow actions
+      function showNegativeThankYou() {
+        form.classList.add('hidden');
+        thankYou.classList.remove('hidden');
+      }
+
+      // Buttons
+      openGoogleBtn.addEventListener('click', () => {
+        try {
+          window.parent.postMessage({ type: 'openReview' }, '*');
+        } catch (e) {}
+      });
+      closePositiveBtn.addEventListener('click', () => {
+        googlePrompt.classList.add('hidden');
+      });
+
+      // Submit handler
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const rating = getOverall();
+        if (rating === null) {
+          alert('Please select an overall rating.');
+          return;
+        }
+
+        // 4–5 stars: DO NOT send to Formspree; just show Google prompt + postMessage
         if (rating >= 4) {
-          expanded.classList.add('hidden');
-        } else {
-          expanded.classList.remove('hidden');
+          showPositiveFlow();
+          return;
+        }
+
+        // 1–3 stars: submit to Formspree via fetch
+        const fd = new FormData(form);
+        try {
+          const resp = await fetch(form.action, {
+            method: 'POST',
+            body: fd,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (resp.ok) {
+            showNegativeThankYou();
+          } else {
+            alert('There was a problem submitting your feedback. Please try again.');
+          }
+        } catch (err) {
+          alert('Network error. Please try again later.');
         }
       });
-    });
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const selected = [...stars].find(r => r.checked);
-      if (selected && parseInt(selected.value) >= 4) {
-        window.parent.postMessage({ type: 'openReview' }, '*');
-      } else {
-        alert("Thank you for your feedback!");
-      }
-    });
+    })();
   </script>
 </body>
 </html>
